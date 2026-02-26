@@ -80,7 +80,12 @@ Edit `.env`:
 ```
 GROQ_API_KEY=your_groq_api_key_here
 CONFIG_FILE=config.json
-INPUT_FILE=input_leads.xlsx
+INPUT_FILE=output/generated_leads.xlsx
+
+# Optional: override script defaults
+MAX_WORKERS=5
+REQUEST_DELAY=2
+GROQ_MODEL=groq/compound-mini
 ```
 
 Get your API key from [Groq Console](https://console.groq.com/keys).
@@ -155,11 +160,12 @@ CONFIG_FILE=custom_config.json python generate_leads.py
 
 ## Configuration Options
 
-Each script has tunable constants at the top of the file:
+These can be set via environment variables or edited directly in the scripts:
 
-| Parameter             | Description                       | Default |
-| --------------------- | --------------------------------- | ------- |
-| `MAX_WORKERS`         | Parallel threads                  | 3-5     |
-| `REQUEST_DELAY`       | Delay between API calls (seconds) | 0.5-2   |
-| `RETRY_ATTEMPTS`      | Retries on failure                | 3-5     |
-| `CHECKPOINT_INTERVAL` | Leads between checkpoint saves    | 50      |
+| Env Variable          | Description                       | Default              |
+| --------------------- | --------------------------------- | -------------------- |
+| `MAX_WORKERS`         | Parallel threads                  | 3-5                  |
+| `REQUEST_DELAY`       | Delay between API calls (seconds) | 2                    |
+| `GROQ_MODEL`          | Groq model to use                 | `groq/compound-mini` |
+| `RETRY_ATTEMPTS`      | Retries on failure                | 3-5                  |
+| `CHECKPOINT_INTERVAL` | Leads between checkpoint saves    | 50                   |
