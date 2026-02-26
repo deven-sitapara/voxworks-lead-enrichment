@@ -18,7 +18,7 @@ All scripts use Groq's `groq/compound` model for AI-driven web search, parallel 
 
 Searches the web for leads within specific location using targeted search categories.
 
-Also searches a curated list of companies by name. 
+Also searches a curated list of companies by name.
 
 Outputs deduplicated leads with name, company, role, city, phone, email, LinkedIn, and match reason.
 
@@ -47,22 +47,43 @@ A targeted enrichment pass that finds missing contact details (phone numbers, em
 
 ## Setup
 
-### Requirements
-
-- Python 3.8+
-- Dependencies: `groq`, `pandas`, `openpyxl`
+### 1. Clone or download zip and enter directory
 
 ```bash
-pip install groq pandas openpyxl
+git clone <repo-url>
+cd voxworks-lead-enrichment
 ```
 
-### Configuration
+### 2. Create virtual environment
 
-Set your Groq API key as an environment variable or in a `.env` file:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install groq pandas python-dotenv openpyxl
+```
+
+### 4. Configure environment
+
+Copy the example env file and add your Groq API key:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
 
 ```
-GROQ_API_KEY=your_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
+CONFIG_FILE=config.json
+INPUT_FILE=input_leads.xlsx
 ```
+
+Get your API key from [Groq Console](https://console.groq.com/keys).
 
 ## Usage
 
@@ -106,6 +127,7 @@ Each template defines a search category and a query prompt. The query is sent to
 ```
 
 Tips for writing good queries:
+
 - Name specific companies or ranking lists to get targeted results
 - Ask for both senior and junior agents if you want a range of seniority
 - Each template runs once per city, so one template across 8 cities = 8 API calls
@@ -135,9 +157,9 @@ CONFIG_FILE=custom_config.json python generate_leads.py
 
 Each script has tunable constants at the top of the file:
 
-| Parameter | Description | Default |
-|---|---|---|
-| `MAX_WORKERS` | Parallel threads | 3-5 |
-| `REQUEST_DELAY` | Delay between API calls (seconds) | 0.5-2 |
-| `RETRY_ATTEMPTS` | Retries on failure | 3-5 |
-| `CHECKPOINT_INTERVAL` | Leads between checkpoint saves | 50 |
+| Parameter             | Description                       | Default |
+| --------------------- | --------------------------------- | ------- |
+| `MAX_WORKERS`         | Parallel threads                  | 3-5     |
+| `REQUEST_DELAY`       | Delay between API calls (seconds) | 0.5-2   |
+| `RETRY_ATTEMPTS`      | Retries on failure                | 3-5     |
+| `CHECKPOINT_INTERVAL` | Leads between checkpoint saves    | 50      |

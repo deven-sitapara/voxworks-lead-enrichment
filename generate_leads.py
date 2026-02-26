@@ -21,8 +21,9 @@ load_dotenv()
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 TODAY = datetime.now().strftime("%Y-%m-%d")
 OUTPUT_FILE = f"output/generated_leads_{TODAY}.xlsx"
-MAX_WORKERS = 3  # Conservative to avoid rate limits
-REQUEST_DELAY = 2
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", 3))
+REQUEST_DELAY = int(os.environ.get("REQUEST_DELAY", 2))
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "groq/compound-mini")
 
 
 def load_config():
@@ -66,31 +67,17 @@ def search_leads(query, category, city):
 
     prompt = f"""{query}
 
-For each real estate agent you find, extract their information. Include BOTH senior people (principals, directors) AND junior/mid-level agents (sales associates, BDMs, executives) who do high-volume prospecting and calling.
+Return JSON array only:
+[{{"name":"","company":"","role":"","city":"","phone":null,"email":null,"linkedin":null,"source":"","match_reason":""}}]
 
-Return as a JSON array with these fields for each agent:
-[{{
-    "name": "Full name",
-    "company": "Agency/Company name",
-    "role": "Job title",
-    "city": "City",
-    "phone": "Phone number if found, otherwise null",
-    "email": "Email if found, otherwise null",
-    "linkedin": "LinkedIn URL if found, otherwise null",
-    "source": "Where you found this info (e.g., company website, RateMyAgent, LinkedIn)",
-    "match_reason": "Why they match criteria (e.g., 'Top 10 agent 2024', 'Project marketing director', 'Boutique agency principal')"
-}}]
-
-IMPORTANT: Return ONLY a valid JSON array, starting with [ and ending with ]. No markdown, no explanations, just the JSON array.
-Find 5-15 relevant agents per search. Do not include generic entries like 'Admin' or 'Rental Department'.
-If you cannot find specific agents, return an empty array: []"""
+Find 5-10 agents. No markdown, just JSON array."""
 
     leads = []
 
     for attempt in range(3):
         try:
             resp = client.chat.completions.create(
-                model="groq/compound",
+                model=GROQ_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1
             )

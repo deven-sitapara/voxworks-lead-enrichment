@@ -23,11 +23,12 @@ INPUT_FILE = os.environ.get("INPUT_FILE", "input_leads.xlsx")
 TODAY = datetime.now().strftime("%Y-%m-%d")
 OUTPUT_FILE = f"output/enriched_leads_{TODAY}.xlsx"
 CHECKPOINT_FILE = "output/enrichment_checkpoint.json"
-MAX_WORKERS = 5  # Reduced to avoid rate limits
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", 5))
 CHECKPOINT_INTERVAL = 50  # Save checkpoint every N completed leads
 RETRY_ATTEMPTS = 5  # More retries for rate limits
 RETRY_DELAY = 10  # Longer delay between retries
-REQUEST_DELAY = 0.5  # Delay between requests to avoid rate limits
+REQUEST_DELAY = int(os.environ.get("REQUEST_DELAY", 2))
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "groq/compound-mini")
 
 # Thread-safe lock for checkpoint
 checkpoint_lock = threading.Lock()
@@ -110,7 +111,7 @@ def enrich_lead(args):
     for attempt in range(RETRY_ATTEMPTS):
         try:
             response = client.chat.completions.create(
-                model="groq/compound",
+                model=GROQ_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1
             )

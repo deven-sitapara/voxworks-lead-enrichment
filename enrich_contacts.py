@@ -25,8 +25,9 @@ TODAY = datetime.now().strftime("%Y-%m-%d")
 _candidates = sorted(glob.glob("output/generated_leads_????-??-??.xlsx"))
 INPUT_FILE = _candidates[-1] if _candidates else "output/generated_leads.xlsx"
 OUTPUT_FILE = f"output/generated_leads_enriched_{TODAY}.xlsx"
-MAX_WORKERS = 5
-REQUEST_DELAY = 1.5
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", 5))
+REQUEST_DELAY = int(os.environ.get("REQUEST_DELAY", 2))
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "groq/compound-mini")
 
 lock = threading.Lock()
 stats = {"completed": 0, "found_phone": 0, "found_email": 0, "errors": 0, "total": 0}
@@ -68,7 +69,7 @@ Return ONLY the JSON, no other text."""
 
     try:
         resp = client.chat.completions.create(
-            model="groq/compound",
+            model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.1
         )
