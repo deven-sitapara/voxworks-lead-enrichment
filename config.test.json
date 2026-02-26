@@ -1,0 +1,12 @@
+{
+  "cities": ["Sydney"],
+  "search_templates": [
+    {
+      "category": "Top Performers",
+      "query": "Search for the highest selling real estate agents in {city} Australia. Find agents ranked in top 100 lists, REB rankings, or known for selling large volumes. Include both established performers and rising stars."
+    }
+  ],
+  "boutique_agencies": {
+    "Sydney": ["BresicWhitney"]
+  }
+}

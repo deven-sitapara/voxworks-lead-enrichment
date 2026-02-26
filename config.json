@@ -1,0 +1,56 @@
+{
+  "cities": [
+    "Sydney",
+    "Melbourne",
+    "Brisbane",
+    "Perth",
+    "Adelaide",
+    "Canberra",
+    "Hobart",
+    "Gold Coast"
+  ],
+  "search_templates": [
+    {
+      "category": "Project Marketing",
+      "query": "Search for off-the-plan and project marketing real estate agents in {city}. Find agents who specialize in selling new apartment developments for developers. Include both senior directors AND junior sales executives/associates who do high-volume prospecting."
+    },
+    {
+      "category": "Developer Sales Teams",
+      "query": "Find real estate agents in {city} who sell properties for developers at CBRE Residential, Colliers Residential, JLL Residential, Knight Frank, Savills. Include project sales managers, sales executives, and BDMs who prospect and call leads."
+    },
+    {
+      "category": "Top Performers",
+      "query": "Search for the highest selling real estate agents in {city} Australia. Find agents ranked in top 100 lists, REB rankings, or known for selling large volumes. Include both established performers and rising stars."
+    },
+    {
+      "category": "Rising Stars",
+      "query": "Find young, high-performing real estate agents in {city} who are rising stars or have won rising star/young achiever awards. Look for agents under 35 who are known for high activity, lots of listings, or innovative approaches."
+    },
+    {
+      "category": "Boutique Agency Teams",
+      "query": "Find agents at boutique real estate agencies in {city}. Include principals AND their high-performing sales agents, associates, and BDMs. Look for independent agencies with active sales teams."
+    },
+    {
+      "category": "Luxury/Prestige",
+      "query": "Search for luxury property agents in {city} selling $2M+ homes. Include both senior agents and their associates/junior partners who handle prospecting and buyer inquiries."
+    },
+    {
+      "category": "BDMs & Prospectors",
+      "query": "Find Business Development Managers (BDMs), listing agents, and prospecting specialists at real estate agencies in {city}. These are agents who focus on cold calling, door knocking, and generating new listings."
+    },
+    {
+      "category": "Sales Associates",
+      "query": "Find real estate sales associates and sales executives in {city} who work under senior agents. These are typically younger professionals who handle high volumes of buyer and seller inquiries, open homes, and follow-up calls."
+    }
+  ],
+  "boutique_agencies": {
+    "Sydney": ["BresicWhitney", "The Agency", "Raine & Horne Double Bay", "Di Jones", "Sydney Sotheby's", "PPD Real Estate", "Cobden Hayson", "Adrian William", "Atlas by LJ Hooker", "Laing+Simmons"],
+    "Melbourne": ["Jellis Craig", "Marshall White", "Kay & Burton", "Buxton", "RT Edgar", "Fletchers", "Biggin & Scott", "Woodards", "Nelson Alexander", "Gary Peer"],
+    "Brisbane": ["Place Estate Agents", "Ray White New Farm", "Belle Property", "Harcourts Property Centre", "Position Property", "NGU Real Estate", "Professionals Real Estate"],
+    "Perth": ["Realmark", "William Porteous", "Space Real Estate", "Mint Real Estate", "Acton", "Shellabears", "Caporn Young"],
+    "Adelaide": ["Ouwens Casserly", "Klemich Real Estate", "Harris Real Estate", "Toop & Toop", "Belle Property Adelaide"],
+    "Canberra": ["Blackshaw", "Luton Properties", "Independent Property Group", "Peter Blackshaw"],
+    "Gold Coast": ["Kollosche", "Ray White Surfers Paradise", "Harcourts Coastal", "PRD Burleigh Heads"],
+    "Hobart": ["Petrusma Property", "Charlotte Peterswald", "Knight Frank Tasmania", "Fall Real Estate"]
+  }
+}
