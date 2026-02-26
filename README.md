@@ -12,6 +12,8 @@ This project automates three stages of lead prospecting:
 
 All scripts use Groq's `groq/compound` model for AI-driven web search, parallel processing for throughput, and Excel files for input/output.
 
+> **Note:** Use `groq/compound-mini` (default) for free tier accounts.
+
 ## Scripts
 
 ### `generate_leads.py`
